@@ -107,7 +107,7 @@ try:
         # Insert the review_data into Cosmos DB
         insert_into_cosmos(review_data)
         
-        time.sleep(5)
+        time.sleep(1)
 
 except KeyboardInterrupt:
     print("Real-time data generation stopped.")
