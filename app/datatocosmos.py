@@ -1,12 +1,15 @@
-import os
 from azure.cosmos import CosmosClient
+import os
 import random
 import faker
 from datetime import datetime
 import time
 import uuid
+from cryptography.fernet import Fernet
 
 fake = faker.Faker()
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
 
 # Cosmos DB settings
 SETTINGS = {
@@ -21,9 +24,19 @@ client = CosmosClient(SETTINGS['host'], credential=SETTINGS['master_key'])
 database = client.get_database_client(SETTINGS['database_id'])
 container = database.get_container_client(SETTINGS['container_id'])
 
+# Function to encrypt fields
+def encrypt_field(field):
+    return cipher_suite.encrypt(field.encode()).decode()
+
 # Function to insert data into Cosmos DB
 def insert_into_cosmos(data):
     try:
+        # Encrypt specific fields
+        data['user']['name'] = encrypt_field(data['user']['name'])
+        data['user']['email'] = encrypt_field(data['user']['email'])
+        data['user']['location'] = encrypt_field(data['user']['location'])
+        data['user']['dob'] = encrypt_field(data['user']['dob'])
+        
         container.create_item(body=data)
         print("Inserted data into Cosmos DB.")
     except Exception as e:
@@ -96,6 +109,7 @@ def generate_review(user_id, restaurant):
     }
 
     return review_data
+
 
 try:
     while True:
