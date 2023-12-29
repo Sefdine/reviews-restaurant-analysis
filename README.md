@@ -4,7 +4,7 @@
 
 The goal of this project is to establish a comprehensive data pipeline using Azure services to store, process, and analyze restaurant reviews. The emphasis is on leveraging Azure Cosmos DB, Azure Functions, Azure Cognitive Services, and Azure Logic Apps while adhering strictly to data governance principles and GDPR compliance.
 
-![Workflow Diagram](images/fluxdeprojet.png)
+![Workflow Diagram](images/Fluxdeprojet.gif)
 
 ## Implementation
 
