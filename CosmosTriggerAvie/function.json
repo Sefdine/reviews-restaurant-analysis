@@ -6,7 +6,7 @@
       "name": "documents",
       "direction": "in",
       "leaseCollectionName": "leases",
-      "connectionStringSetting": "mentallboys_DOCUMENTDB",
+      "connectionStringSetting": "mentalboys_DOCUMENTDB",
       "databaseName": "Reviews",
       "collectionName": "Items",
       "createLeaseCollectionIfNotExists": true
